@@ -1,6 +1,6 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import SportService from 'sport-service';
+import SportService from './services/sport-service';
 // import App from './App';
 
 // ReactDOM.render(
