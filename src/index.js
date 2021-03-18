@@ -1,18 +1,7 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-import SportService from './services/sport-service';
-// import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/app';
+// import 'bootstrap/dist/css/bootstrap.css';
+// import './index.css';
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
-// class s {
-//     sportService = new SportService();
-// }
-
-let sportService = new SportService();
-sportService.getTeams();
+ReactDOM.render(<App />, document.getElementById('root'));

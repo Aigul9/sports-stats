@@ -11,8 +11,6 @@ export default class SportService {
             }
         });
 
-        console.log(res);
-    
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }
@@ -22,23 +20,17 @@ export default class SportService {
 
     getTeams = async () => {
         const res = await this.getResource('/teams');
-        console.log(res.teams);
         return res.teams.map(this._transformTeam);
     }
 
     _transformTeam = ({id, name, area, founded, venue, clubColors}) => {
-        console.log(id, name, area, founded, clubColors);
         return {
             id,
             name,
             area: area.name,
             founded,
             venue,
-            clubColors
+            colors: clubColors
         }
     }
-
-    // _checkNoData(prop) {
-    //     return prop || '';
-    // }
 }
