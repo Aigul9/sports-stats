@@ -3,7 +3,7 @@
   font-family: arial, sans-serif;
 }
 
-#teams {
+#table {
   text-align: center;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -11,16 +11,16 @@
   width: 100%;
 }
 
-#teams td, #teams th {
+#table td, #teams th {
   border: 1px solid rgb(221, 221, 221);
   padding: 8px;
 }
 
-#teams tr:nth-child(even){background-color: #f2f2f2;}
+#table tr:nth-child(even){background-color: #f2f2f2;}
 
-#teams tr:hover {background-color: rgb(221, 221, 221);}
+#table tr:hover {background-color: rgb(221, 221, 221);}
 
-#teams th {
+#table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
