@@ -3,39 +3,36 @@ import SportService from "../../../services/sport-service";
 import Spinner from "../../spinner";
 import '../table.css';
 
-export default class Teams extends Component {
+export default class Leagues extends Component {
   sportService = new SportService();
 
   state = {
-    teams: [],
+    leagues: [],
     loading: true,
   };
 
   componentDidMount() {
-    this.sportService.getTeams().then(this.onLoaded);
+    this.sportService.getLeagues().then(this.onLoaded);
   }
 
-  onLoaded = (teams) => {
-    this.setState({ teams, loading: false });
+  onLoaded = (leagues) => {
+    this.setState({ leagues, loading: false });
   };
 
   renderTableData() {
-    return this.state.teams.map((team) => {
-      const {id, name, area, founded, venue, colors} = team;
+    return this.state.leagues.map((league) => {
+      const {id, name, area} = league;
       return (
         <tr key={id}>
           <td>{name}</td>
           <td>{area}</td>
-          <td>{founded}</td>
-          <td>{venue}</td>
-          <td>{colors}</td>
         </tr>
       );
     });
   }
 
   renderTableHeader() {
-    let header = Object.keys(this.state.teams[0]);
+    let header = Object.keys(this.state.leagues[0]);
     
     return header.slice(1).map((key, index) => {
       key = key[0].toUpperCase() + key.slice(1);
@@ -45,7 +42,7 @@ export default class Teams extends Component {
 
   render() {
     const { loading } = this.state;
-    const spinner = loading ? <Spinner/> : <h1 id='title'>List of teams</h1>;
+    const spinner = loading ? <Spinner/> : <h1 id='title'>List of leagues</h1>;
     let header = null;
 
     if (!loading) {

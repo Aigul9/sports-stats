@@ -23,6 +23,21 @@ export default class SportService {
         return res.teams.map(this._transformTeam);
     }
 
+    getTeam = async (id) => {
+        const res = await this.getResource(`/teams/${id}`);
+        return this._transformTeam(res);
+    }
+
+    getLeagues = async () => {
+        const res = await this.getResource('/competitions');
+        return res.competitions.map(this._transformLeague);
+    }
+
+    getLeague = async (id) => {
+        const res = await this.getResource(`/competitions/${id}`);
+        return this._transformLeague(res);
+    }
+
     _transformTeam = ({id, name, area, founded, venue, clubColors}) => {
         return {
             id,
@@ -31,6 +46,14 @@ export default class SportService {
             founded,
             venue,
             colors: clubColors
+        }
+    }
+
+    _transformLeague = ({id, name, area}) => {
+        return {
+            id,
+            name,
+            area: area.name
         }
     }
 }

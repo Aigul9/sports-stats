@@ -1,4 +1,4 @@
-@keyframes ldio-tp4pirdj1tc {
+/* @keyframes ldio-tp4pirdj1tc {
   0% {
       opacity: 1;
       backface-visibility: hidden;
@@ -128,4 +128,9 @@
 
 .ldio-tp4pirdj1tc div {
   box-sizing: content-box;
+} */
+
+.spinner {
+  display: flex;
+  margin: auto
 }
