@@ -3,7 +3,7 @@ import "./table.css";
 
 const TableRow = ({ data, onRowClicked }) => {
   return (
-    <tr onClick={onRowClicked} class="row-hover">
+    <tr onClick={onRowClicked} className="row-hover">
       {Object.keys(data)
         .slice(1)
         .map((key, index) => {

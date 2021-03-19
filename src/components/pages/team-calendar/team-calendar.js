@@ -24,7 +24,7 @@ export default class TeamCalendar extends Component {
     return items.map((match) => {
       const { id, date, homeTeam, awayTeam } = match;
       return (
-        <tr key={id} class="row-hover">
+        <tr key={id} className="row-hover">
           <td>{date}</td>
           <td>{homeTeam}</td>
           <td>{awayTeam}</td>
@@ -66,18 +66,18 @@ export default class TeamCalendar extends Component {
     return (
       <>
         <h1 id="title">{this.state.team.name}</h1>
-        <table id="table">
+        <table id="table" className="table-fixed">
           {this.renderTableHeader()}
           <tbody>
             <tr>
-              <td colspan="3">
-                <span class="split">Scheduled ({scheduled.length})</span>
+              <td colSpan="3">
+                <span className="split">Scheduled ({scheduled.length})</span>
               </td>
             </tr>
             {this.renderTableData(scheduled)}
             <tr>
-              <td colspan="3">
-                <span class="split">Finished ({finished.length})</span>
+              <td colSpan="3">
+                <span className="split">Finished ({finished.length})</span>
               </td>
             </tr>
             {this.renderTableData(finished)}

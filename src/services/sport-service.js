@@ -7,7 +7,6 @@ export default class SportService {
 
   async getResource(url) {
     const res = await fetch(`${this._api}${url}`, {
-      //   mode: "cors",
       headers: {
         "X-Auth-Token": process.env.REACT_APP_SPORTS_API_KEY,
       },

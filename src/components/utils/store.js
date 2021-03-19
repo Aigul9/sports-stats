@@ -4,7 +4,7 @@ import Reducer from "./reducer";
 const initialState = {
   teams: [],
   leagues: [],
-  loading: false,
+  error: false,
 };
 
 const Store = ({ children }) => {

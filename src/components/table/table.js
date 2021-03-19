@@ -3,6 +3,7 @@ import TableRow from "./table-row";
 import TableHeadItem from "./table-head-item";
 import { Context } from "../utils/store";
 import Spinner from "../spinner";
+import ErrorIndicator from "../error-indicator";
 import "./table.css";
 
 function Table({ onRowClicked, getData, type }) {
@@ -10,13 +11,23 @@ function Table({ onRowClicked, getData, type }) {
   const items = state[type];
 
   useEffect(() => {
-    getData().then((data) => {
-      dispatch({
-        type: `GET_${type.toUpperCase()}`,
-        payload: data,
+    getData()
+      .then((data) => {
+        dispatch({
+          type: `GET_${type.toUpperCase()}`,
+          payload: data,
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: "GET_ERROR",
+        });
       });
-    });
   }, [getData, dispatch, type]);
+
+  if (state.error) {
+    return <ErrorIndicator />;
+  }
 
   if (items.length === 0) {
     return <Spinner />;
