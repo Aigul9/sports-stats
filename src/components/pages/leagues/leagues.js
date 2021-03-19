@@ -15,7 +15,7 @@ class Leagues extends Component {
           onRowClicked={(id) => {
             this.props.history.push(`/${this.type}/${id}`);
           }}
-          getData={this.sportService.getTeams}
+          getData={this.sportService.getLeagues}
           type={this.type}
         />
       </>

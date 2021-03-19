@@ -1,8 +1,9 @@
 import React from "react";
+import "./table.css";
 
 const TableRow = ({ data, onRowClicked }) => {
   return (
-    <tr onClick={onRowClicked}>
+    <tr onClick={onRowClicked} class="row-hover">
       {Object.keys(data)
         .slice(1)
         .map((key, index) => {
