@@ -5,7 +5,7 @@ import "./table.css";
 
 export default class Table extends Component {
   render() {
-    let { items } = this.props;
+    let { items, onRowClicked } = this.props;
 
     return (
       <table id="table">
@@ -16,7 +16,7 @@ export default class Table extends Component {
         </thead>
         <tbody>
           {items.map((item) => {
-            return <TableRow key={item.id} data={item} />;
+            return <TableRow key={item.id} data={item} onRowClicked={() => onRowClicked(item.id)}/>;
           })}
         </tbody>
       </table>

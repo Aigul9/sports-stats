@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import {withRouter} from 'react-router-dom';
 import SportService from "../../../services/sport-service";
 import Spinner from "../../spinner";
 import Table from "../../table";
 
-export default class Teams extends Component {
+class Teams extends Component {
   sportService = new SportService();
 
   state = {
@@ -26,10 +27,15 @@ export default class Teams extends Component {
     ) : (
       <>
         <h1 id="title">List of teams</h1>
-        <Table items={teams} />
+        <Table items={teams} onRowClicked={(id) => {
+          this.props.history.push(`/teams/${id}`);
+        }
+        }/>
       </>
     );
 
     return <div>{content}</div>;
   }
 }
+
+export default withRouter(Teams);

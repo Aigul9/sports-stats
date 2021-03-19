@@ -1,8 +1,8 @@
 import React from "react";
 
-const TableRow = ({ data }) => {
+const TableRow = ({ data, onRowClicked }) => {
   return (
-    <tr>
+    <tr onClick={onRowClicked}>
       {Object.keys(data)
         .slice(1)
         .map((key, index) => {

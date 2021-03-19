@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "../header";
-import Teams from '../pages/teams';
-import Leagues from '../pages/leagues';
+import Teams from "../pages/teams";
+import Leagues from "../pages/leagues";
+import TeamCalendar from "../pages/team-calendar";
 
 export default class App extends Component {
   render() {
@@ -10,23 +11,19 @@ export default class App extends Component {
       <Router>
         <>
           <Header />
-          <Route path="/teams" component={Teams}/>
-          <Route path="/leagues" component={Leagues}/>
+          <Route path="/teams" exact component={Teams} />
+          <Route path="/leagues" component={Leagues} />
           <Route
-            path="/team/:id"
-            render={({ match, location, history }) => {
-              const { id } = match.params;
-              console.log(id);
-              // return <BookItem bookId={id}/>
+            path="/teams/:id"
+            render={({ match }) => {
+              return <TeamCalendar teamId={match.params.id} />;
             }}
           />
           <Route
             path="/league/:id"
             render={({ match, location, history }) => {
               console.log(match, location, history);
-              const { id } = match.params;
-              console.log(id);
-              // return <BookItem bookId={id}/>
+              //   const { id } = match.params;
             }}
           />
         </>
