@@ -4,15 +4,17 @@ import Header from "../header";
 import Teams from "../pages/teams";
 import Leagues from "../pages/leagues";
 import TeamCalendar from "../pages/team-calendar";
+import LeagueCalendar from "../pages/league-calendar";
+import Store from "../utils/store";
 
 export default class App extends Component {
   render() {
     return (
       <Router>
-        <>
+        <Store>
           <Header />
           <Route path="/teams" exact component={Teams} />
-          <Route path="/leagues" component={Leagues} />
+          <Route path="/leagues" exact component={Leagues} />
           <Route
             path="/teams/:id"
             render={({ match }) => {
@@ -20,13 +22,12 @@ export default class App extends Component {
             }}
           />
           <Route
-            path="/league/:id"
-            render={({ match, location, history }) => {
-              console.log(match, location, history);
-              //   const { id } = match.params;
+            path="/leagues/:id"
+            render={({ match }) => {
+              return <LeagueCalendar leagueId={match.params.id} />;
             }}
           />
-        </>
+        </Store>
       </Router>
     );
   }
