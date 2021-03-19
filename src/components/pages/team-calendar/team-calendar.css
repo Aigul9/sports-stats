@@ -1,0 +1,14 @@
+.lose {
+  color: #d25454;
+  font-weight: bold;
+}
+
+.win {
+  color: #009700;
+  font-weight: bold;
+}
+
+.draw {
+  color: #c2c21f;
+  font-weight: bold;
+}

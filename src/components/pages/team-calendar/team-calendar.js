@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SportService from "../../../services/sport-service";
 import Spinner from "../../spinner";
+import "./team-calendar.css";
 
 export default class TeamCalendar extends Component {
   sportService = new SportService();
@@ -12,6 +13,7 @@ export default class TeamCalendar extends Component {
 
   componentDidMount() {
     this.sportService.getMatch(this.props.teamId).then(({ matches }) => {
+      console.log(matches);
       this.setState({ matches });
     });
 
@@ -20,14 +22,32 @@ export default class TeamCalendar extends Component {
       .then((team) => this.setState({ team, loading: false }));
   }
 
+  assignClass(winner, type) {
+    if (winner === null) {
+      return;
+    }
+    if (winner === "DRAW") {
+      return "draw";
+    }
+    if (winner.substr(0, 4).toLowerCase() === type) {
+      return "win";
+    } else {
+      return "lose";
+    }
+  }
+
   renderTableData(items) {
     return items.map((match) => {
-      const { id, date, homeTeam, awayTeam } = match;
+      const { id, date, winner, homeTeam, awayTeam } = match;
+
+      const classHomeTeam = this.assignClass(winner, "home"),
+        classAwayTeam = this.assignClass(winner, "away");
+
       return (
         <tr key={id} className="row-hover">
           <td>{date}</td>
-          <td>{homeTeam}</td>
-          <td>{awayTeam}</td>
+          <td className={classHomeTeam}>{homeTeam}</td>
+          <td className={classAwayTeam}>{awayTeam}</td>
         </tr>
       );
     });
