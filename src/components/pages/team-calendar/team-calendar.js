@@ -22,7 +22,7 @@ export default class TeamCalendar extends Component {
       .then((team) => this.setState({ team, loading: false }));
   }
 
-  assignClass(winner, type) {
+  assignMatchResultClass(winner, type) {
     if (winner === null) {
       return;
     }
@@ -36,18 +36,24 @@ export default class TeamCalendar extends Component {
     }
   }
 
+  // assignCurrentTeamClass(teamName) {
+  //   return teamName === this.state.team.name ? "current-team" : null;
+  // }
+
   renderTableData(items) {
     return items.map((match) => {
       const { id, date, winner, homeTeam, awayTeam } = match;
 
-      const classHomeTeam = this.assignClass(winner, "home"),
-        classAwayTeam = this.assignClass(winner, "away");
+      const classHomeTeam = this.assignMatchResultClass(winner, "home"),
+        classAwayTeam = this.assignMatchResultClass(winner, "away");
+      // classHomeCurrent = this.assignCurrentTeamClass(homeTeam),
+      // classAwayCurrent = this.assignCurrentTeamClass(awayTeam);
 
       return (
         <tr key={id} className="row-hover">
           <td>{date}</td>
-          <td className={classHomeTeam}>{homeTeam}</td>
-          <td className={classAwayTeam}>{awayTeam}</td>
+          <td className={`${classHomeTeam}`}>{homeTeam}</td>
+          <td className={`${classAwayTeam}`}>{awayTeam}</td>
         </tr>
       );
     });
