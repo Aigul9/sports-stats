@@ -1,26 +1,66 @@
-import React, { Component } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Table from "../../table";
-import SportService from "../../../services/sport-service";
+import ErrorIndicator from "../../error-indicator";
+import SearchBar from "../../search-bar";
+import { Context } from "../../utils/store";
 
-class Teams extends Component {
-  sportService = new SportService();
-  type = "teams";
+const Teams = ({ history, getData }) => {
+  const [state, dispatch] = useContext(Context);
+  const [input, setInput] = useState("");
+  const [items, setItems] = useState(state.teams);
 
-  render() {
-    return (
-      <>
-        <h1 id="title"> List of {this.type} </h1>
-        <Table
-          onRowClicked={(id) => {
-            this.props.history.push(`/${this.type}/${id}`);
-          }}
-          getData={this.sportService.getTeams}
-          type={this.type}
-        />
-      </>
-    );
+  useEffect(() => {
+    getData()
+      .then((data) => {
+        dispatch({
+          type: "GET_TEAMS",
+          payload: data,
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: "GET_ERROR",
+        });
+      });
+  }, [getData, dispatch]);
+
+  const updateInput = (text = "") => {
+    setInput(text);
+    if (!text) {
+      setItems(state.teams);
+      return;
+    }
+
+    const filtered = state.teams.filter((item) => {
+      return item.name.toLowerCase().includes(text.toLowerCase());
+    });
+
+    setItems(filtered);
+  };
+
+  useEffect(() => {
+    updateInput();
+  }, [state.teams]);
+
+  if (state.error) {
+    return <ErrorIndicator />;
   }
-}
+
+  console.log(history);
+
+  return (
+    <>
+      <h1 id="title"> List of teams </h1>
+      <SearchBar input={input} onChange={updateInput} />
+      <Table
+        onRowClicked={(id) => {
+          history.push(`/teams/${id}`);
+        }}
+        items={items}
+      />
+    </>
+  );
+};
 
 export default withRouter(Teams);

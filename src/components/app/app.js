@@ -6,14 +6,20 @@ import Leagues from "../pages/leagues";
 import TeamCalendar from "../pages/team-calendar";
 import LeagueCalendar from "../pages/league-calendar";
 import Store from "../utils/store";
+import SportService from "../../services/sport-service";
 
 export default class App extends Component {
+  sportService = new SportService();
   render() {
     return (
       <Router>
         <Store>
           <Header />
-          <Route path="/teams" exact component={Teams} />
+          <Route
+            path="/teams"
+            exact
+            render={() => <Teams getData={this.sportService.getTeams} />}
+          ></Route>
           <Route path="/leagues" exact component={Leagues} />
           <Route
             path="/teams/:id"

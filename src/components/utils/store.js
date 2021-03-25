@@ -4,6 +4,7 @@ import Reducer from "./reducer";
 const initialState = {
   teams: [],
   leagues: [],
+  text: "",
   error: false,
 };
 

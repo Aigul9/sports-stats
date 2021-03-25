@@ -4,13 +4,16 @@ const Reducer = (state, action) => {
       return {
         ...state,
         teams: action.payload,
-        error: false,
       };
     case "GET_LEAGUES":
       return {
         ...state,
         leagues: action.payload,
-        error: false,
+      };
+    case "GET_SEARCH":
+      return {
+        ...state,
+        text: action.payload,
       };
     case "GET_ERROR":
       return {
