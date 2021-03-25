@@ -2,7 +2,7 @@ import moment from "moment";
 
 export default class SportService {
   constructor() {
-    this._api = "http://api.football-data.org/v2";
+    this._api = "https://api.football-data.org/v2";
   }
 
   async getResource(url) {
