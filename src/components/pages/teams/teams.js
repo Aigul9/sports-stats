@@ -5,10 +5,28 @@ import ErrorIndicator from "../../error-indicator";
 import SearchBar from "../../search-bar";
 import { Context } from "../../utils/store";
 
-const Teams = ({ history, getData }) => {
+const Teams = ({ history, location, getData }) => {
   const [state, dispatch] = useContext(Context);
   const [input, setInput] = useState("");
   const [items, setItems] = useState(state.teams);
+
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+
+  const updateInput = (text = "") => {
+    setInput(text);
+
+    if (!text) {
+      setItems(state.teams);
+      return;
+    }
+
+    const filtered = state.teams.filter((item) => {
+      return item.name.toLowerCase().includes(text.toLowerCase());
+    });
+
+    setItems(filtered);
+  };
 
   useEffect(() => {
     getData()
@@ -25,29 +43,19 @@ const Teams = ({ history, getData }) => {
       });
   }, [getData, dispatch]);
 
-  const updateInput = (text = "") => {
-    setInput(text);
-    if (!text) {
-      setItems(state.teams);
-      return;
+  useEffect(() => {
+    const name = params.get("name") || "";
+
+    if (name) {
+      history.push({ search: params.toString() });
     }
 
-    const filtered = state.teams.filter((item) => {
-      return item.name.toLowerCase().includes(text.toLowerCase());
-    });
-
-    setItems(filtered);
-  };
-
-  useEffect(() => {
-    updateInput();
+    updateInput(name);
   }, [state.teams]);
 
   if (state.error) {
     return <ErrorIndicator />;
   }
-
-  console.log(history);
 
   return (
     <>
@@ -58,6 +66,7 @@ const Teams = ({ history, getData }) => {
           history.push(`/teams/${id}`);
         }}
         items={items}
+        type="teams"
       />
     </>
   );

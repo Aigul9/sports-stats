@@ -5,9 +5,9 @@ import Spinner from "../spinner";
 import { Context } from "../utils/store";
 import "./table.css";
 
-function Table({ items, onRowClicked }) {
+function Table({ items, onRowClicked, type }) {
   const [state] = useContext(Context);
-  const globalItems = state.teams;
+  const globalItems = state[type];
   if (globalItems.length === 0) {
     return <Spinner />;
   }

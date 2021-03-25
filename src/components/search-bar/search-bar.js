@@ -4,7 +4,6 @@ import "./search-bar.css";
 
 const SearchBar = ({ input, onChange }) => {
   const history = useHistory();
-  console.log(input);
 
   useEffect(() => {
     const params = new URLSearchParams();
