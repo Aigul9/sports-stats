@@ -6,10 +6,8 @@ import Leagues from "../pages/leagues";
 import TeamCalendar from "../pages/team-calendar";
 import LeagueCalendar from "../pages/league-calendar";
 import Store from "../utils/store";
-// import SportService from "../../services/sport-service";
 
 export default class App extends Component {
-  // sportService = new SportService();
   render() {
     return (
       <Router>

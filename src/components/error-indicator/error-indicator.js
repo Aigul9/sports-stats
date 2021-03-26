@@ -6,7 +6,7 @@ const ErrorIndicator = () => {
   return (
     <div className="error-indicator">
       <img src={img} alt="Error icon" />
-      <span>Data can not be fetched. Try again later.</span>
+      <span>Data cannot be fetched. Try again later.</span>
     </div>
   );
 };

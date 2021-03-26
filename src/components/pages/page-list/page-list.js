@@ -2,31 +2,47 @@ import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Table from "../../table";
 import ErrorIndicator from "../../error-indicator";
+import Spinner from "../../spinner";
 import SearchBar from "../../search-bar";
+import SelectList from "../../select-list";
 import { Context } from "../../utils/store";
 
-const PageList = ({ history, getData, type }) => {
+const PageList = ({ history, getData, type, optionField }) => {
+  // list of teams/leagues
   const [state, dispatch] = useContext(Context);
+  // search field
   const [input, setInput] = useState("");
-  const initialData = state[type];
-  const [items, setItems] = useState(initialData);
+  // selected option
+  const [selectedOption, setSelectedOption] = useState();
 
   const search = window.location.search;
   const params = new URLSearchParams(search);
 
-  const updateInput = (text = "") => {
-    setInput(text);
-
+  const searchItems = (array, text) => {
     if (!text) {
-      setItems(initialData);
-      return;
+      return array;
     }
 
-    const filtered = initialData.filter((item) => {
-      return item.name.toLowerCase().includes(text.toLowerCase());
-    });
+    return array.filter((item) =>
+      item.name.toLowerCase().includes(text.toLowerCase())
+    );
+  };
 
-    setItems(filtered);
+  const filterItems = (array, value) => {
+    if (!value) {
+      return array;
+    }
+
+    return array.filter((item) => item[optionField] === value);
+  };
+
+  const onSearchChange = (text = "") => {
+    setInput(text);
+  };
+
+  const onYearChange = (value) => {
+    let year = value ? value.value : "";
+    setSelectedOption(year);
   };
 
   useEffect(() => {
@@ -42,7 +58,7 @@ const PageList = ({ history, getData, type }) => {
           type: "GET_ERROR",
         });
       });
-  }, [getData, dispatch]);
+  }, []);
 
   useEffect(() => {
     const name = params.get("name") || "";
@@ -51,22 +67,38 @@ const PageList = ({ history, getData, type }) => {
       history.push({ search: params.toString() });
     }
 
-    updateInput(name);
-  }, [initialData]);
+    onSearchChange(name);
+  }, [state[type]]);
 
   if (state.error) {
     return <ErrorIndicator />;
   }
 
+  const visibleItems = filterItems(
+    searchItems(state[type], input),
+    selectedOption
+  );
+
+  if (state[type].length === 0) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <h1 id="title"> List of {type} </h1>
-      <SearchBar input={input} onChange={updateInput} />
+      <div className="table-options">
+        <SearchBar input={input} onChange={onSearchChange} />
+        <SelectList
+          items={state[type]}
+          optionField={optionField}
+          onChange={onYearChange}
+        />
+      </div>
       <Table
         onRowClicked={(id) => {
           history.push(`/${type}/${id}`);
         }}
-        items={items}
+        items={visibleItems}
         type={type}
       />
     </>
