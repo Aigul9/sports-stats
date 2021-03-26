@@ -9,7 +9,7 @@ const SelectList = ({ items, optionField, onChange, selectedOption }) => {
   const getSelectOptions = () => {
     let selectOptions = [
       ...new Set(items.map((item) => item[optionField]).filter((item) => item)),
-    ].sort(); // list of years
+    ].sort();
 
     selectOptions = selectOptions.map((value) => {
       return { value, label: value };
@@ -20,7 +20,7 @@ const SelectList = ({ items, optionField, onChange, selectedOption }) => {
 
   useEffect(() => {
     getSelectOptions();
-  }, []);
+  }, [items]);
 
   const history = useHistory();
 

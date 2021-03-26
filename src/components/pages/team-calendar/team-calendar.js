@@ -1,25 +1,32 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import SportService from "../../../services/sport-service";
 import Spinner from "../../spinner";
+import SelectList from "../../select-list";
 import "./team-calendar.css";
 
-export default class TeamCalendar extends Component {
+class TeamCalendar extends Component {
   sportService = new SportService();
   state = {
     matches: [],
     team: {},
     loading: true,
+    selectedOption: null,
   };
 
   componentDidMount() {
     this.sportService.getMatch(this.props.teamId).then(({ matches }) => {
-      console.log(matches);
       this.setState({ matches });
     });
 
     this.sportService
       .getTeam(this.props.teamId)
       .then((team) => this.setState({ team, loading: false }));
+
+    const params = new URLSearchParams(window.location.search);
+    this.props.history.push({ search: params.toString() });
+    const year = params.get("year") || "";
+    this.onYearChange(year);
   }
 
   assignMatchResultClass(winner, type) {
@@ -71,27 +78,57 @@ export default class TeamCalendar extends Component {
     );
   }
 
-  filterFinished() {
-    return this.state.matches
-      .filter((item) => item.status === "FINISHED")
-      .reverse();
+  filterFinished(items) {
+    return items.filter((item) => item.status === "FINISHED").reverse();
   }
 
-  filterScheduled() {
-    return this.state.matches.filter((item) => item.status === "SCHEDULED");
+  filterScheduled(items) {
+    return items.filter((item) => item.status === "SCHEDULED");
   }
+
+  filterByYear(items, year) {
+    if (!year) {
+      return items;
+    }
+
+    return items.filter((item) => item.date.substr(6, 4) === year);
+  }
+
+  onYearChange = (year) => {
+    this.setState({ selectedOption: year });
+  };
+
+  updateArray = (items) => {
+    return items.map((item) => {
+      return {
+        ...item,
+        date: item.date.substr(6, 4),
+      };
+    });
+  };
 
   render() {
-    const scheduled = this.filterScheduled(),
-      finished = this.filterFinished();
+    const { matches, team, loading, selectedOption } = this.state;
+    const scheduled = this.filterScheduled(
+        this.filterByYear(matches, selectedOption)
+      ),
+      finished = this.filterFinished(
+        this.filterByYear(matches, selectedOption)
+      );
 
-    if (this.state.loading) {
+    if (loading) {
       return <Spinner />;
     }
 
     return (
       <>
-        <h1 id="title">{this.state.team.name}</h1>
+        <h1 id="title">{team.name}</h1>
+        <SelectList
+          items={this.updateArray(matches)}
+          optionField="date"
+          onChange={this.onYearChange}
+          selectedOption={selectedOption}
+        />
         <table id="table" className="table-fixed">
           {this.renderTableHeader()}
           <tbody>
@@ -113,3 +150,5 @@ export default class TeamCalendar extends Component {
     );
   }
 }
+
+export default withRouter(TeamCalendar);

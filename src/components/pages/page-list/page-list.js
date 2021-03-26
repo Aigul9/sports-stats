@@ -8,11 +8,8 @@ import SelectList from "../../select-list";
 import { Context } from "../../utils/store";
 
 const PageList = ({ history, getData, type, optionField }) => {
-  // list of teams/leagues
   const [state, dispatch] = useContext(Context);
-  // search field
   const [input, setInput] = useState("");
-  // selected option
   const [selectedOption, setSelectedOption] = useState();
 
   const params = new URLSearchParams(window.location.search);
