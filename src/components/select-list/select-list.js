@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SortedSet from "js-sorted-set";
+import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import "./select-list.css";
 
-const SelectList = ({ items, optionField, onChange }) => {
+const SelectList = ({ items, optionField, onChange, selectedOption }) => {
   const [options, setOptions] = useState([]);
 
   const getSelectOptions = () => {
@@ -22,11 +22,38 @@ const SelectList = ({ items, optionField, onChange }) => {
     getSelectOptions();
   }, []);
 
+  const history = useHistory();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (selectedOption) {
+      params.set("year", selectedOption);
+    } else {
+      params.delete("year");
+    }
+    history.push({ search: params.toString() });
+  }, [selectedOption, history]);
+
+  function handleChange(event) {
+    if (!event) {
+      event = "";
+    } else {
+      event = event.value;
+    }
+
+    onChange(event);
+  }
+
   return (
     <Select
+      value={{
+        value: selectedOption,
+        label: selectedOption || "Select...",
+      }}
       options={options}
       className="select-list"
-      onChange={(value) => onChange(value)}
+      onChange={handleChange}
       isClearable={true}
     />
   );

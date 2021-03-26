@@ -6,9 +6,10 @@ const SearchBar = ({ input, onChange }) => {
   const history = useHistory();
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
+
     if (input) {
-      params.append("name", input);
+      params.set("name", input);
     } else {
       params.delete("name");
     }

@@ -15,8 +15,7 @@ const PageList = ({ history, getData, type, optionField }) => {
   // selected option
   const [selectedOption, setSelectedOption] = useState();
 
-  const search = window.location.search;
-  const params = new URLSearchParams(search);
+  const params = new URLSearchParams(window.location.search);
 
   const searchItems = (array, text) => {
     if (!text) {
@@ -41,8 +40,7 @@ const PageList = ({ history, getData, type, optionField }) => {
   };
 
   const onYearChange = (value) => {
-    let year = value ? value.value : "";
-    setSelectedOption(year);
+    setSelectedOption(+value);
   };
 
   useEffect(() => {
@@ -62,12 +60,11 @@ const PageList = ({ history, getData, type, optionField }) => {
 
   useEffect(() => {
     const name = params.get("name") || "";
-
-    if (name) {
-      history.push({ search: params.toString() });
-    }
+    const year = params.get("year") || "";
+    history.push({ search: params.toString() });
 
     onSearchChange(name);
+    onYearChange(year);
   }, [state[type]]);
 
   if (state.error) {
@@ -92,6 +89,7 @@ const PageList = ({ history, getData, type, optionField }) => {
           items={state[type]}
           optionField={optionField}
           onChange={onYearChange}
+          selectedOption={selectedOption}
         />
       </div>
       <Table

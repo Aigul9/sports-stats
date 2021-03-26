@@ -13,6 +13,8 @@ export default class SportService {
       },
     });
 
+    console.log(res);
+
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}, status: ${res.status}`);
     }
