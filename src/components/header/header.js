@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <Navbar>
-      <Navbar.Body>
+      <Navbar.Body className="header">
         <Nav>
           <Nav.Item>
             <Link to="/sports-stats/" className="link link-header">

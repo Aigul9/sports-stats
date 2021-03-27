@@ -1,14 +1,22 @@
 .link {
   font-size: 18px;
-  color: black;
+  color: white !important;
+  font-weight: bold;
 }
 
 .link:hover,
 .link:visited {
-  color: black;
   text-decoration: none;
+}
+
+.link:hover {
+  color: #324960 !important;
 }
 
 .link-header {
   pointer-events: none;
+}
+
+.rs-navbar {
+  background-color: #6897bb !important;
 }
