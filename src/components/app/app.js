@@ -10,7 +10,7 @@ import Store from "../utils/store";
 export default class App extends Component {
   render() {
     return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <Store>
           <Header />
           <Route exact path="/">
