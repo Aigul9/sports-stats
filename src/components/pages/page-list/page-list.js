@@ -90,15 +90,13 @@ const PageList = ({ history, getData, type, optionField }) => {
           selectedOption={selectedOption}
         />
       </div>
-      <div className="table-wrapper">
-        <Table
-          onRowClicked={(id) => {
-            history.push(`/sports-stats/${type}/${id}`);
-          }}
-          items={visibleItems}
-          type={type}
-        />
-      </div>
+      <Table
+        onRowClicked={(id) => {
+          history.push(`/sports-stats/${type}/${id}`);
+        }}
+        items={visibleItems}
+        type={type}
+      />
     </>
   );
 };

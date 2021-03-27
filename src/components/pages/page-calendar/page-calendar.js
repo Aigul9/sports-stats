@@ -49,18 +49,12 @@ class PageCalendar extends Component {
     }
   }
 
-  // assignCurrentitemClass(itemName) {
-  //   return itemName === this.state.item.name ? "current-item" : null;
-  // }
-
   renderTableData(matches) {
     return matches.map((match) => {
       const { id, date, winner, homeTeam, awayTeam } = match;
 
       const classHomeTeam = this.assignMatchResultClass(winner, "home"),
         classAwayTeam = this.assignMatchResultClass(winner, "away");
-      // classHomeCurrent = this.assignCurrentitemClass(homeitem),
-      // classAwayCurrent = this.assignCurrentitemClass(awayitem);
 
       return (
         <tr key={id} className="row-hover">

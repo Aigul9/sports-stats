@@ -9,26 +9,26 @@ function Table({ items, onRowClicked, type }) {
   const globalItems = state[type];
 
   return (
-    // <div className="table-wrapper">
-    <table className="fl-table">
-      <thead>
-        <tr>
-          <TableHeadItem item={globalItems[0]} />
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item) => {
-          return (
-            <TableRow
-              key={item.id}
-              data={item}
-              onRowClicked={() => onRowClicked(item.id)}
-            />
-          );
-        })}
-      </tbody>
-    </table>
-    // </div>
+    <div className="table-wrapper">
+      <table className="fl-table">
+        <thead>
+          <tr>
+            <TableHeadItem item={globalItems[0]} />
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => {
+            return (
+              <TableRow
+                key={item.id}
+                data={item}
+                onRowClicked={() => onRowClicked(item.id)}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
