@@ -1,3 +1,3 @@
-import TeamCalendar from './team-calendar';
+import TeamCalendar from "./team-calendar";
 
 export default TeamCalendar;

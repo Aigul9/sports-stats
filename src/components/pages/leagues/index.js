@@ -1,3 +1,3 @@
-import Leagues from './leagues';
+import Leagues from "./leagues";
 
 export default Leagues;

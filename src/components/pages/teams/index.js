@@ -1,3 +1,3 @@
-import Teams from './teams';
+import Teams from "./teams";
 
 export default Teams;
