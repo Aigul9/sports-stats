@@ -25,7 +25,7 @@ const SelectList = ({ items, optionField, onChange, selectedOption }) => {
   const history = useHistory();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.hash.split("?")[1]);
 
     if (selectedOption) {
       params.set("year", selectedOption);

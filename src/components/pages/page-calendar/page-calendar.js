@@ -29,7 +29,7 @@ class PageCalendar extends Component {
         this.setState({ loading: false, error: true });
       });
 
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.hash.split("?")[1]);
     this.props.history.push({ search: params.toString() });
     const year = params.get("year") || "";
     this.onYearChange(year);

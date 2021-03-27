@@ -13,7 +13,7 @@ const PageList = ({ history, getData, type, optionField }) => {
   const [input, setInput] = useState("");
   const [selectedOption, setSelectedOption] = useState();
 
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.hash.split("?")[1]);
 
   const searchItems = (array, text) => {
     if (!text) {
@@ -59,6 +59,7 @@ const PageList = ({ history, getData, type, optionField }) => {
   useEffect(() => {
     const name = params.get("name") || "";
     const year = params.get("year") || "";
+    console.log("h", params.toString());
     history.push({ search: params.toString() });
 
     onSearchChange(name);
@@ -92,7 +93,7 @@ const PageList = ({ history, getData, type, optionField }) => {
       </div>
       <Table
         onRowClicked={(id) => {
-          history.push(`/sports-stats/${type}/${id}`);
+          history.push(`/${type}/${id}`);
         }}
         items={visibleItems}
         type={type}
