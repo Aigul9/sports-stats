@@ -79,8 +79,8 @@ const PageList = ({ history, getData, type, optionField }) => {
 
   return (
     <>
-      <h1 id="title"> List of {type} </h1>
-      <div className="table-options">
+      <h2 id="title"> List of {type} </h2>
+      <div>
         <SearchBar input={input} onChange={onSearchChange} />
         <SelectList
           items={state[type]}

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import moment from "moment";
 import SportService from "../../../services/sport-service";
 import Spinner from "../../spinner";
 import SelectList from "../../select-list";
+import DateSelector from "../../date-selector";
 import "./team-calendar.css";
 
 class TeamCalendar extends Component {
@@ -12,6 +14,8 @@ class TeamCalendar extends Component {
     team: {},
     loading: true,
     selectedOption: null,
+    startDate: null,
+    endDate: null,
   };
 
   componentDidMount() {
@@ -107,13 +111,48 @@ class TeamCalendar extends Component {
     });
   };
 
+  onDateChange = (dates) => {
+    const [startDate, endDate] = dates;
+    this.setState({ startDate, endDate });
+    console.log(startDate, endDate);
+  };
+
+  filterByDates = (items, startDate, endDate) => {
+    if (!startDate) {
+      return items;
+    }
+
+    return items.filter((item) => {
+      const teamDate = new Date(moment(item.date, "DD.MM.YYYY")).getTime(),
+        dateBefore = new Date(startDate).getTime(),
+        dateAfter = new Date(endDate).getTime();
+      return dateBefore <= teamDate && teamDate <= dateAfter;
+    });
+  };
+
   render() {
-    const { matches, team, loading, selectedOption } = this.state;
+    const {
+      matches,
+      team,
+      loading,
+      selectedOption,
+      startDate,
+      endDate,
+    } = this.state;
+
     const scheduled = this.filterScheduled(
-        this.filterByYear(matches, selectedOption)
+        this.filterByDates(
+          this.filterByYear(matches, selectedOption),
+          startDate,
+          endDate
+        )
       ),
       finished = this.filterFinished(
-        this.filterByYear(matches, selectedOption)
+        this.filterByDates(
+          this.filterByYear(matches, selectedOption),
+          startDate,
+          endDate
+        )
       );
 
     if (loading) {
@@ -122,13 +161,16 @@ class TeamCalendar extends Component {
 
     return (
       <>
-        <h1 id="title">{team.name}</h1>
-        <SelectList
-          items={this.updateArray(matches)}
-          optionField="date"
-          onChange={this.onYearChange}
-          selectedOption={selectedOption}
-        />
+        <h2 id="title">{team.name}</h2>
+        <div className="date-fields">
+          <DateSelector onChange={this.onDateChange} />
+          <SelectList
+            items={this.updateArray(matches)}
+            optionField="date"
+            onChange={this.onYearChange}
+            selectedOption={selectedOption}
+          />
+        </div>
         <table id="table" className="table-fixed">
           {this.renderTableHeader()}
           <tbody>
