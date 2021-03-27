@@ -16,14 +16,16 @@ class PageCalendar extends Component {
     selectedOption: null,
     startDate: null,
     endDate: null,
+    error: true,
   };
 
   componentDidMount() {
     this.sportService
       .getMatch(this.props.type, this.props.itemId)
       .then(({ matches }) => {
-        this.setState({ matches, loading: false });
-      });
+        this.setState({ matches, loading: false, error: false });
+      })
+      .catch(this.setState({ loading: false, error: true }));
 
     const params = new URLSearchParams(window.location.search);
     this.props.history.push({ search: params.toString() });
@@ -128,7 +130,22 @@ class PageCalendar extends Component {
   };
 
   render() {
-    const { matches, loading, selectedOption, startDate, endDate } = this.state;
+    const {
+      matches,
+      loading,
+      selectedOption,
+      startDate,
+      endDate,
+      error,
+    } = this.state;
+
+    if (loading) {
+      return <Spinner />;
+    }
+
+    if (error) {
+      return <ErrorIndicator />;
+    }
 
     const scheduled = this.filterScheduled(
         this.filterByDates(
@@ -144,10 +161,6 @@ class PageCalendar extends Component {
           endDate
         )
       );
-
-    if (loading) {
-      return <Spinner />;
-    }
 
     return (
       <>

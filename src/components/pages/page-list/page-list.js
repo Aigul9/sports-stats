@@ -91,7 +91,7 @@ const PageList = ({ history, getData, type, optionField }) => {
       </div>
       <Table
         onRowClicked={(id) => {
-          history.push(`/${type}/${id}`);
+          history.push(`/sports-stats/${type}/${id}`);
         }}
         items={visibleItems}
         type={type}

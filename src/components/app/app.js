@@ -13,19 +13,19 @@ export default class App extends Component {
       <Router>
         <Store>
           <Header />
-          <Route exact path="/">
-            <Redirect to="/teams" />
+          <Route exact path="/sports-stats/">
+            <Redirect to="/sports-stats/teams" />
           </Route>
-          <Route path="/teams" exact component={Teams} />
-          <Route path="/leagues" exact component={Leagues} />
+          <Route path="/sports-stats/teams" exact component={Teams} />
+          <Route path="/sports-stats/leagues" exact component={Leagues} />
           <Route
-            path="/teams/:id"
+            path="/sports-stats/teams/:id"
             render={({ match }) => {
               return <TeamCalendar teamId={match.params.id} />;
             }}
           />
           <Route
-            path="/leagues/:id"
+            path="/sports-stats/leagues/:id"
             render={({ match }) => {
               return <LeagueCalendar leagueId={match.params.id} />;
             }}
