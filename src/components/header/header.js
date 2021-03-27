@@ -1,22 +1,31 @@
 import React from "react";
+import { Navbar, Nav } from "rsuite";
 import "./header.css";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="header-block">
-      <h3>
-        <Link to="/sports-stats/">Sports statistics</Link>
-      </h3>
-      <ul>
-        <li>
-          <Link to="/sports-stats/teams">Teams</Link>
-        </li>
-        <li>
-          <Link to="/sports-stats/leagues">Leagues</Link>
-        </li>
-      </ul>
-    </div>
+    <Navbar>
+      <Navbar.Body>
+        <Nav>
+          <Nav.Item>
+            <Link to="/sports-stats/" className="link link-header">
+              Sports statistics
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/sports-stats/teams" className="link">
+              Teams
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/sports-stats/leagues" className="link">
+              Leagues
+            </Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Body>
+    </Navbar>
   );
 };
 

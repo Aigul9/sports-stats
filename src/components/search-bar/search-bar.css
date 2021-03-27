@@ -1,6 +1,11 @@
 .search-input {
   width: 30%;
-  flex-grow: 1;
-  margin: 0 0 10px 10px;
-  float: left;
+  margin: 0 10px 10px 70px;
+}
+
+@media (max-width: 767px) {
+  .search-input {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
 }

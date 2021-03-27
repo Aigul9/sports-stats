@@ -7,7 +7,7 @@ const LeagueCalendar = ({ leagueId }) => {
   const [leagueName, setLeague] = useState();
 
   useEffect(() => {
-    sportService.getTeam(leagueId).then((league) => {
+    sportService.getLeague(leagueId).then((league) => {
       setLeague(league.name);
     });
   }, []);

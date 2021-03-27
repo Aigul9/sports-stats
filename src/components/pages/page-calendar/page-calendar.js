@@ -16,7 +16,7 @@ class PageCalendar extends Component {
     selectedOption: null,
     startDate: null,
     endDate: null,
-    error: true,
+    error: false,
   };
 
   componentDidMount() {
@@ -25,7 +25,9 @@ class PageCalendar extends Component {
       .then(({ matches }) => {
         this.setState({ matches, loading: false, error: false });
       })
-      .catch(this.setState({ loading: false, error: true }));
+      .catch((e) => {
+        this.setState({ loading: false, error: true });
+      });
 
     const params = new URLSearchParams(window.location.search);
     this.props.history.push({ search: params.toString() });
@@ -165,7 +167,7 @@ class PageCalendar extends Component {
     return (
       <>
         <h2 id="title">{this.props.itemName}</h2>
-        <div className="date-fields">
+        <div className="options">
           <DateSelector onChange={this.onDateChange} />
           <SelectList
             items={this.updateArray(matches)}
@@ -174,23 +176,25 @@ class PageCalendar extends Component {
             selectedOption={selectedOption}
           />
         </div>
-        <table id="table" className="table-fixed">
-          {this.renderTableHeader()}
-          <tbody>
-            <tr>
-              <td colSpan="3">
-                <span className="split">Scheduled ({scheduled.length})</span>
-              </td>
-            </tr>
-            {this.renderTableData(scheduled)}
-            <tr>
-              <td colSpan="3">
-                <span className="split">Finished ({finished.length})</span>
-              </td>
-            </tr>
-            {this.renderTableData(finished)}
-          </tbody>
-        </table>
+        <div className="table-wrapper">
+          <table className="fl-table fixed">
+            {this.renderTableHeader()}
+            <tbody>
+              <tr>
+                <td colSpan="3">
+                  <span className="split">Scheduled ({scheduled.length})</span>
+                </td>
+              </tr>
+              {this.renderTableData(scheduled)}
+              <tr>
+                <td colSpan="3">
+                  <span className="split">Finished ({finished.length})</span>
+                </td>
+              </tr>
+              {this.renderTableData(finished)}
+            </tbody>
+          </table>
+        </div>
       </>
     );
   }

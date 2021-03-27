@@ -9,7 +9,8 @@ function Table({ items, onRowClicked, type }) {
   const globalItems = state[type];
 
   return (
-    <table id="table">
+    // <div className="table-wrapper">
+    <table className="fl-table">
       <thead>
         <tr>
           <TableHeadItem item={globalItems[0]} />
@@ -27,6 +28,7 @@ function Table({ items, onRowClicked, type }) {
         })}
       </tbody>
     </table>
+    // </div>
   );
 }
 

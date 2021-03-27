@@ -6,6 +6,7 @@ import Spinner from "../../spinner";
 import SearchBar from "../../search-bar";
 import SelectList from "../../select-list";
 import { Context } from "../../utils/store";
+import "./page-list.css";
 
 const PageList = ({ history, getData, type, optionField }) => {
   const [state, dispatch] = useContext(Context);
@@ -80,7 +81,7 @@ const PageList = ({ history, getData, type, optionField }) => {
   return (
     <>
       <h2 id="title"> List of {type} </h2>
-      <div>
+      <div className="options">
         <SearchBar input={input} onChange={onSearchChange} />
         <SelectList
           items={state[type]}
@@ -89,13 +90,15 @@ const PageList = ({ history, getData, type, optionField }) => {
           selectedOption={selectedOption}
         />
       </div>
-      <Table
-        onRowClicked={(id) => {
-          history.push(`/sports-stats/${type}/${id}`);
-        }}
-        items={visibleItems}
-        type={type}
-      />
+      <div className="table-wrapper">
+        <Table
+          onRowClicked={(id) => {
+            history.push(`/sports-stats/${type}/${id}`);
+          }}
+          items={visibleItems}
+          type={type}
+        />
+      </div>
     </>
   );
 };
