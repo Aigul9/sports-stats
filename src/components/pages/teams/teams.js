@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import PageList from "../page-list";
 import SportService from "../../../services/sport-service";
 
@@ -17,4 +16,4 @@ const Teams = () => {
   );
 };
 
-export default withRouter(Teams);
+export default Teams;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import SportService from "../../../services/sport-service";
 import PageCalendar from "../page-calendar";
 
@@ -24,4 +23,4 @@ const LeagueCalendar = ({ leagueId }) => {
   );
 };
 
-export default withRouter(LeagueCalendar);
+export default LeagueCalendar;

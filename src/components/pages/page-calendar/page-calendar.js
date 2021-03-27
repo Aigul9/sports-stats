@@ -16,7 +16,6 @@ class PageCalendar extends Component {
     selectedOption: null,
     startDate: null,
     endDate: null,
-    error: false,
   };
 
   componentDidMount() {
@@ -24,8 +23,7 @@ class PageCalendar extends Component {
       .getMatch(this.props.type, this.props.itemId)
       .then(({ matches }) => {
         this.setState({ matches, loading: false });
-      })
-      .catch(this.setState({ error: true }));
+      });
 
     const params = new URLSearchParams(window.location.search);
     this.props.history.push({ search: params.toString() });
@@ -130,18 +128,7 @@ class PageCalendar extends Component {
   };
 
   render() {
-    const {
-      matches,
-      loading,
-      selectedOption,
-      startDate,
-      endDate,
-      error,
-    } = this.state;
-
-    if (error) {
-      return <ErrorIndicator />;
-    }
+    const { matches, loading, selectedOption, startDate, endDate } = this.state;
 
     const scheduled = this.filterScheduled(
         this.filterByDates(

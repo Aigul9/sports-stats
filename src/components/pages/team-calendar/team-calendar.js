@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import SportService from "../../../services/sport-service";
 import PageCalendar from "../page-calendar";
 
@@ -8,7 +7,6 @@ const TeamCalendar = ({ teamId }) => {
   const [teamName, setTeam] = useState();
 
   useEffect(() => {
-    debugger;
     sportService.getTeam(teamId).then((team) => {
       setTeam(team.name);
     });
@@ -21,4 +19,4 @@ const TeamCalendar = ({ teamId }) => {
   );
 };
 
-export default withRouter(TeamCalendar);
+export default TeamCalendar;
