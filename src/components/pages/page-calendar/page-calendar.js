@@ -6,26 +6,26 @@ import Spinner from "../../spinner";
 import SelectList from "../../select-list";
 import DateSelector from "../../date-selector";
 import "./page-calendar.css";
+import ErrorIndicator from "../../error-indicator";
 
 class PageCalendar extends Component {
   sportService = new SportService();
   state = {
     matches: [],
-    item: {},
     loading: true,
     selectedOption: null,
     startDate: null,
     endDate: null,
+    error: false,
   };
 
   componentDidMount() {
-    this.sportService.getMatch(this.props.itemId).then(({ matches }) => {
-      this.setState({ matches });
-    });
-
-    this.props
-      .getData(this.props.itemId)
-      .then((item) => this.setState({ item, loading: false }));
+    this.sportService
+      .getMatch(this.props.type, this.props.itemId)
+      .then(({ matches }) => {
+        this.setState({ matches, loading: false });
+      })
+      .catch(this.setState({ error: true }));
 
     const params = new URLSearchParams(window.location.search);
     this.props.history.push({ search: params.toString() });
@@ -132,12 +132,16 @@ class PageCalendar extends Component {
   render() {
     const {
       matches,
-      item,
       loading,
       selectedOption,
       startDate,
       endDate,
+      error,
     } = this.state;
+
+    if (error) {
+      return <ErrorIndicator />;
+    }
 
     const scheduled = this.filterScheduled(
         this.filterByDates(
@@ -160,7 +164,7 @@ class PageCalendar extends Component {
 
     return (
       <>
-        <h2 id="title">{item.name}</h2>
+        <h2 id="title">{this.props.itemName}</h2>
         <div className="date-fields">
           <DateSelector onChange={this.onDateChange} />
           <SelectList

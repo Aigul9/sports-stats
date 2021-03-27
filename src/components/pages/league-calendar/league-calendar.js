@@ -1,8 +1,27 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
+import SportService from "../../../services/sport-service";
+import PageCalendar from "../page-calendar";
 
-export default class LeagueCalendar extends Component {
-  render() {
-    let { leagueId } = this.props;
-    return <h1>{leagueId}</h1>;
-  }
-}
+const LeagueCalendar = ({ leagueId }) => {
+  const sportService = new SportService();
+  const [leagueName, setLeague] = useState();
+
+  useEffect(() => {
+    sportService.getTeam(leagueId).then((league) => {
+      setLeague(league.name);
+    });
+  }, []);
+
+  return (
+    <>
+      <PageCalendar
+        itemId={leagueId}
+        itemName={leagueName}
+        type="competitions"
+      />
+    </>
+  );
+};
+
+export default withRouter(LeagueCalendar);

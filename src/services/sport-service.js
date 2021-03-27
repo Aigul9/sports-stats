@@ -12,8 +12,6 @@ export default class SportService {
       },
     });
 
-    console.log(res);
-
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}, status: ${res.status}`);
     }
@@ -31,8 +29,9 @@ export default class SportService {
     return this._transformTeam(res);
   };
 
-  getMatch = async (id) => {
-    const res = await this.getResource(`/teams/${id}/matches`);
+  getMatch = async (type, id) => {
+    const res = await this.getResource(`/${type}/${id}/matches`);
+
     return {
       count: res.count,
       matches: res.matches.map(this._transformMatch),
