@@ -1,15 +1,15 @@
-.link {
-  font-size: 18px;
+.rs-nav-item-content {
+  font-size: 18px !important;
   color: white !important;
   font-weight: bold;
 }
 
-.link:hover,
-.link:visited {
+.rs-nav-item-content:hover,
+.rs-nav-item-content:visited {
   text-decoration: none;
 }
 
-.link:hover {
+.rs-nav-item-content:hover {
   color: #324960 !important;
 }
 
@@ -19,4 +19,5 @@
 
 .rs-navbar {
   background-color: #6897bb !important;
+  color: white !important;
 }
