@@ -63,7 +63,6 @@ export default class SportService {
   _transformMatch = ({ id, utcDate, status, score, homeTeam, awayTeam }) => {
     return {
       id,
-      // date: utcDate,
       date: this.convertDate(utcDate),
       status,
       winner: score.winner,
@@ -81,7 +80,6 @@ export default class SportService {
   }
 
   convertDate(utcDate) {
-    // console.log(moment(utcDate));
     return moment(utcDate).format("DD.MM.YYYY HH:mm");
   }
 }
