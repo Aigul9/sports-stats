@@ -1,7 +1,13 @@
 .select-list {
   width: 200px;
   float: right;
-  margin: 0 70px 10px 0;
+  margin: 5px 0;
+}
+
+@media (max-width: 1199px) {
+  .select-list {
+    float: right;
+  }
 }
 
 @media (max-width: 767px) {

@@ -6,7 +6,6 @@ import Spinner from "../../spinner";
 import SearchBar from "../../search-bar";
 import SelectList from "../../select-list";
 import { Context } from "../../utils/store";
-import "./page-list.css";
 
 const PageList = ({ history, getData, type, optionField }) => {
   const [state, dispatch] = useContext(Context);
@@ -59,7 +58,6 @@ const PageList = ({ history, getData, type, optionField }) => {
   useEffect(() => {
     const name = params.get("name") || "";
     const year = params.get("year") || "";
-    console.log("h", params.toString());
     history.push({ search: params.toString() });
 
     onSearchChange(name);
@@ -80,7 +78,7 @@ const PageList = ({ history, getData, type, optionField }) => {
   }
 
   return (
-    <>
+    <div className="space">
       <h2 id="title"> List of {type} </h2>
       <div className="options">
         <SearchBar input={input} onChange={onSearchChange} />
@@ -98,7 +96,7 @@ const PageList = ({ history, getData, type, optionField }) => {
         items={visibleItems}
         type={type}
       />
-    </>
+    </div>
   );
 };
 

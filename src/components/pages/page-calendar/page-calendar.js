@@ -159,7 +159,7 @@ class PageCalendar extends Component {
       );
 
     return (
-      <>
+      <div className="space">
         <h2 id="title">{this.props.itemName}</h2>
         <div className="options">
           <DateSelector onChange={this.onDateChange} />
@@ -189,7 +189,7 @@ class PageCalendar extends Component {
             </tbody>
           </table>
         </div>
-      </>
+      </div>
     );
   }
 }

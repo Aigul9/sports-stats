@@ -20,4 +20,7 @@
 .rs-navbar {
   background-color: #6897bb !important;
   color: white !important;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }

@@ -1,16 +1,13 @@
 .lose {
   color: #d25454;
-  font-weight: bold;
 }
 
 .win {
   color: #009700;
-  font-weight: bold;
 }
 
 .draw {
   color: #c2c21f;
-  font-weight: bold;
 }
 
 .fixed {
@@ -20,16 +17,27 @@
 .options {
   justify-content: space-between;
   display: flex;
+  padding: 0 70px;
+}
+
+@media (max-width: 1199px) {
+  .options {
+    width: 100%;
+    padding: 0 15px;
+  }
 }
 
 @media (max-width: 767px) {
   .options {
     display: inline-block;
     width: 100%;
-    padding: 15px;
   }
 }
 
 .split {
   font-weight: bold;
+}
+
+.space {
+  margin-top: 60px;
 }
