@@ -20,8 +20,19 @@ const PageList = ({ history, getData, type, optionField }) => {
     }
 
     return array.filter((item) =>
-      item.name.toLowerCase().includes(text.toLowerCase())
+      Object.values(item)
+        .slice(1)
+        .some((field) => {
+          return convertField(field)
+            .toString()
+            .toLowerCase()
+            .includes(text.toLowerCase());
+        })
     );
+  };
+
+  const convertField = (field) => {
+    return field || "";
   };
 
   const filterItems = (array, value) => {
