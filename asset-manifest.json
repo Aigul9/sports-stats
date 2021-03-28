@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/sports-stats/static/css/main.4f1567ef.chunk.css",
+    "main.css": "/sports-stats/static/css/main.d572387c.chunk.css",
     "main.js": "/sports-stats/static/js/main.4121feba.chunk.js",
     "main.js.map": "/sports-stats/static/js/main.4121feba.chunk.js.map",
     "runtime-main.js": "/sports-stats/static/js/runtime-main.86731375.js",
@@ -10,7 +10,7 @@
     "static/js/2.a2ceac5e.chunk.js.map": "/sports-stats/static/js/2.a2ceac5e.chunk.js.map",
     "index.html": "/sports-stats/index.html",
     "static/css/2.54bc7213.chunk.css.map": "/sports-stats/static/css/2.54bc7213.chunk.css.map",
-    "static/css/main.4f1567ef.chunk.css.map": "/sports-stats/static/css/main.4f1567ef.chunk.css.map",
+    "static/css/main.d572387c.chunk.css.map": "/sports-stats/static/css/main.d572387c.chunk.css.map",
     "static/js/2.a2ceac5e.chunk.js.LICENSE.txt": "/sports-stats/static/js/2.a2ceac5e.chunk.js.LICENSE.txt",
     "static/media/spinner.e971a131.svg": "/sports-stats/static/media/spinner.e971a131.svg"
   },
@@ -18,7 +18,7 @@
     "static/js/runtime-main.86731375.js",
     "static/css/2.54bc7213.chunk.css",
     "static/js/2.a2ceac5e.chunk.js",
-    "static/css/main.4f1567ef.chunk.css",
+    "static/css/main.d572387c.chunk.css",
     "static/js/main.4121feba.chunk.js"
   ]
 }
