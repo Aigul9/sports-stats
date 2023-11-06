@@ -1,10 +1,16 @@
 import moment from "moment";
 
 export default class SportService {
+  constructor() {
+    this._api = "https://api.football-data.org/v2";
+  }
+
   async getResource(url) {
-    const res = await fetch(url, {
+    const res = await fetch(`${this._api}${url}`, {
+      mode: "CORS",
       headers: {
         "X-Auth-Token": process.env.REACT_APP_SPORTS_API_KEY,
+        "Access-Control-Allow-Origin": "*",
       },
     });
 
